@@ -1,0 +1,12 @@
+---
+title: "Model equations"
+output: pdf_document
+---
+
+\begin{equation}
+Y_{i j}=\mu_{i}+\nu_{j}+\epsilon_{i j}
+\end{equation}
+
+\begin{equation}
+Y_{i j}=\beta_{0 i}+\sum_{h=1}^{8} \beta_{1 h} X_{h}+\nu_{j}+\epsilon_{i j}
+\end{equation}
