@@ -1,7 +1,11 @@
 ---
 title: "Model equations"
 output: pdf_document
+header-includes:
+  - \usepackage{amsmath}
 ---
+
+# Original single line equations
 
 \begin{equation}
 Y_{i j}=\mu_{i}+\nu_{j}+\epsilon_{i j}
@@ -10,3 +14,15 @@ Y_{i j}=\mu_{i}+\nu_{j}+\epsilon_{i j}
 \begin{equation}
 Y_{i j}=\beta_{0 i}+\sum_{h=1}^{8} \beta_{1 h} X_{h}+\nu_{j}+\epsilon_{i j}
 \end{equation}
+
+\begin{equation}
+Y_{i j}=\beta_{0 i}+\sum_{h=1}^{8} \beta_{1 h} X_{h}+v_{j}+\varepsilon_{i j}
+\end{equation}
+
+# Multi-line versions
+
+\begin{align*}
+Y_{i j} & \sim Norm(\mu_{i j}, \epsilon) \\
+\mu_{i j} & = \beta_{0 i}+\nu_{j}\tag{4} \\
+\nu_{j} & \sim Norm(0, \sigma_{\nu})
+\end{align*}
