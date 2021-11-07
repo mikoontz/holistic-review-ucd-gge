@@ -1,0 +1,88 @@
+---
+title: "Model equations"
+output: pdf_document
+header-includes:
+  - \usepackage{amsmath}
+---
+
+# Original single line equations
+
+\begin{equation}
+Y_{i j} = \mu_{i} + \epsilon_{i j}
+\end{equation}
+
+\begin{equation}
+Y_{i j} = \mu_{i}+\nu_{j} + \epsilon_{i j}
+\end{equation}
+
+\begin{equation}
+Y_{i j} = \beta_{0 i} + \sum_{h=1}^{8} \beta_{1 h} X_{h i j} + v_{j} + \varepsilon_{i j}
+\end{equation}
+
+\newpage
+
+# Multi-line versions
+
+## Equation 1 (Model A)
+\begin{align*}
+Y_{i j} & \sim Norm(\mu_{i j}, \sigma_{\epsilon}) \\
+\mu_{i j} & = \beta_{0 i}\tag{1} \\
+\end{align*}
+
+Where $Y_{ij}$ is the score assigned to application $i$ by reviewer $j$, $\beta_{0 i}$ is the mean score of application $i$ (and what we call the "true" score for application $i$), and $\sigma_{\epsilon}$ is the standard deviation of the residuals (i.e., the unexplained random error).
+
+## Equation 2 (Model B)
+\begin{align*}
+Y_{i j} & \sim Norm(\mu_{i j}, \sigma_{\epsilon}) \\
+\mu_{i j} & = \beta_{0 i}+\nu_{j}\tag{2} \\
+\nu_{j} & \sim Norm(0, \sigma_{\nu})
+\end{align*}
+
+Where $Y_{ij}$ is the score assigned to application $i$ by reviewer $j$, $\beta_{0 i}$ is the "true" score for application $i$, $\sigma_{\nu}$ is the estimated standard deviation of the normal distribution from which the random intercept effect of reviewer $j$ is drawn, and $\sigma_{\epsilon}$ is the standard deviation of the residuals (i.e., the unexplained random error), and can be thought of as the deviation of $Y_{ij}$ from $\beta_{0 i}+\nu_{j}$.
+
+## Equation 3 (Model C)
+\begin{align*}
+Y_{i j} & \sim Norm(\mu_{i j}, \sigma_{\epsilon}) \\
+\mu_{i j} & = \beta_{0 i} + \sum_{h=1}^{8} \beta_{1 h} X_{h i j} + \nu_{j}\tag{3} \\
+\nu_{j} & \sim Norm(0, \sigma_{\nu})
+\end{align*}
+
+Where $Y_{ij}$ is the score assigned to application $i$ by reviewer $j$, $\beta_{0 i}$ is the application score intercept for applicant $i$, $\beta_{1 h}$ is the regression coefficient (i.e., the slope) associated with each of the eight traits $X_{h}$ and is the effect of one unit increase in trait score $h$, $X_{h i j}$ is the score assigned for trait $h$ to applicant $i$ by reviewer $j$, $\sigma_{\nu}$ is the estimated standard deviation of the normal distribution from which the random intercept effect of reviewer $j$ is drawn, and $\sigma_{\epsilon}$ is the standard deviation of the residuals (i.e., the unexplained random error).
+
+\newpage 
+
+# Final applicant score
+
+## Model A
+\begin{align*}
+Y_{i} = \beta_{0 i}\tag{1} \\
+\end{align*}
+
+$Y_{i}$ is the final application score assigned to applicant $i$, and is equivalent to the estimated intercept from Model A for applicant $i$: $\beta_{0 i}$.
+
+## Model B
+\begin{align*}
+Y_{i} = \beta_{0 i}\tag{2} \\
+\end{align*}
+
+$Y_{i}$ is the final application score assigned to applicant $i$, and is equivalent to the estimated intercept from Model B for applicant $i$ for an average reviewer: $\beta_{0 i}$. Note that the reviewer bias is accounted for by assuming it is zero, which is why $Y_{i}$ represents the score for an average reviewer.
+
+## Model C
+\begin{align*}
+Y_{i} = \beta_{0 i} + \frac{\sum_{j=1}^{J} \sum_{h=1}^{8} \beta_{1 h} X_{h i j}}{J}\tag{3} \\
+\end{align*}
+
+$Y_{i}$ is the final application score assigned to applicant $i$, and is equivalent to the estimated intercept from Model C for applicant $i$ for an average reviewer, $\beta_{0 i}$, added to the average of the additive effects of the reviewer assignments of trait scores across $J$ reviewers of applicant $i$. Note that the reviewer bias is accounted for by assuming it is zero, which is why $Y_{i}$ represents the score for an average reviewer.
+
+# Interpetation of Table 3
+
+One of the key benefits that I see for the multi-line approach is that we can reference elements in the equations directly elsewhere in the paper (like in Table 3).
+I'm still totally fine with this all just going in the supplemental though, if that seems more appropriate!
+Avg.Score is the "modeled application scores" (I just posted a comment about this in the document asking which model), but it sounds to me like this would be equivalent to $\frac{\sum_{i=1}^{I}Y_{i}}{I}$ for whichever model it is. That is, the average of the $Y_{i}$ (modeled application score) across $I$ applicants.
+
+A.res would be equivalent to $\sigma_{\epsilon}$ for Model A
+B.res would be equivalent to $\sigma_{\epsilon}$ for Model B
+C.res would be equivalent to $\sigma_{\epsilon}$ for Model C
+B.rvwr would be equivalent to $\sigma_{\nu}$ for Model B
+C.rvwr would be equivalent to $\sigma_{\nu}$ for Model C
+CV_C would be equivalent to $\sigma_{\epsilon}$ for Model C divided by Avg.Score for Model C
